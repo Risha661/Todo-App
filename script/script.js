@@ -2,20 +2,14 @@
 import {renderTODO} from './modules/render.js';
 import {formControl} from './modules/control.js';
 
-const start = (selectorApp) => {
-  const app = document.querySelector(selectorApp);
-
-  const name = localStorage.getItem('name');
-  if (!name) {
+const start = () => {
     const newName = prompt('Введите ваше имя:');
-    if (newName) {
-      localStorage.setItem('name', newName);
-      renderTODO(app, newName);
-      formControl();
-    }
-  } else {
-    renderTODO(app, name);
+    let stor = localStorage.getItem(newName);
+    alert(stor + ' ' + newName);
+    if (stor === null){
+      localStorage.setItem(newName, JSON.stringify([]));  
+    } 
+    renderTODO(); 
     formControl();
-  }
 };
 window.startInit = start;

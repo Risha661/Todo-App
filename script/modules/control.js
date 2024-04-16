@@ -12,13 +12,15 @@ export const handleInput = () => {
 
 export const saveTask = () => {
   const taskInput = document.getElementById('taskInput');
-  const task = taskInput.value;
+  const taskVal = taskInput.value;
+  
   
   const name = localStorage.getItem('name');
   let tasks = JSON.parse(localStorage.getItem(name)) || [];
 
   const taskObject = {
     id: generateRandomId(),
+    task: taskVal,
   };
 
   tasks.push(taskObject);
