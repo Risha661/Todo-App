@@ -1,7 +1,7 @@
 
 import * as create from './create.js';
 import {getStorage, setStorage, removeItemStorage} from "./localStorage.js";
-import {handleInput, saveTask, tasks, formControl} from './control.js';
+import {handleInput, saveTask, formControl} from './control.js';
 
 export const renderTODO = () => {
 const app = document.querySelector('.app-container');
@@ -26,8 +26,9 @@ export const renderTask = (name) => {
   const tbody = document.querySelector('tbody');
   tbody.innerHTML = '';
 
-  tasks.forEach((task) => {
-    const row = create.createRow(task);
+  tasks.forEach((task, index) => {
+    console.log(task.task);
+    const row = create.createRow(task.task, task.status, index);
     tbody.appendChild(row);
   });
   return tbody;

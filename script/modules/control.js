@@ -2,26 +2,31 @@ import {renderTask} from "./render.js";
 import { getStorage, setStorage } from "./localStorage.js";
 import {generateRandomId} from './generate.js';
 
-export const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+const saveButton = document.getElementById('saveButton');
+const taskInput = document.getElementById('taskInput');
+const resetButton = document.getElementById('resetButton');
 
 export const handleInput = () => {
-  const saveButton = document.getElementById('saveButton');
   const taskInput = document.getElementById('taskInput');
-  saveButton.disabled = taskInput.value.trim() === '';
+  const saveButton = document.getElementById('saveButton');
+  const resetButton = document.getElementById('resetButton');
+  saveButton.disabled = taskInput.value === '';
+  resetButton.disabled = taskInput.value === '';
 };
 
 export const saveTask = () => {
   const taskInput = document.getElementById('taskInput');
-  const taskVal = taskInput.value;
-  
+  const task = taskInput.value;
   
   const name = localStorage.getItem('name');
   let tasks = JSON.parse(localStorage.getItem(name)) || [];
 
   const taskObject = {
     id: generateRandomId(),
-    task: taskVal,
+    task: task,
+    status: true,
   };
+  
 
   tasks.push(taskObject);
   localStorage.setItem(name, JSON.stringify(tasks));
@@ -41,8 +46,13 @@ export const saveTask = () => {
 
 export const formControl = () => {
   const taskInput = document.getElementById('taskInput');
+  const resetButton = document.getElementById('resetButton');
   const saveButton = document.getElementById('saveButton');
 
+  saveButton.disabled = true;
+  resetButton.disabled = true;
+  
   saveButton.addEventListener('click', saveTask);
   taskInput.addEventListener('input', handleInput);
+  handleInput();
 };

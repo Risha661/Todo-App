@@ -1,11 +1,16 @@
- const getStorage = () => {
-  const name = localStorage.getItem('name');
-  let tasks = localStorage.getItem(name) || [];
-  return tasks;
+ const getStorage = (key) => {
+  const data = localStorage.getItem(key);
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return [];
+  }
 }
 
-const setStorage = (name, data) => {
-  localStorage.setItem(name, JSON.stringify(data))
+const setStorage = (key, object) => {
+  const data = getStorage(key);
+  data.push(object);
+  localStorage.setItem(key, JSON.stringify(data));
 };
 
 const removeItemStorage = (name, itemId) => {

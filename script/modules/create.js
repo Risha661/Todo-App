@@ -12,20 +12,20 @@ export const createContainer = () => {
   return container;
 };
 
-export const createRow = () => {
+export const createRow = (task, status, index1) => {
   const tr = document.createElement('tr');
   tr.classList.add('table-light');
 
   const tdIndex = document.createElement('td');
   const index = renderNumber();
-  tdIndex.textContent = index;
+  tdIndex.textContent = index1 + 1;
 
   const tdTask = document.createElement('td');
-  tdTask.textContent = getStorage();
+  tdTask.textContent = task;
 
   const tdStatus = document.createElement('td');
   tdStatus.classList.add('.process');
-  tdStatus.textContent = 'В процессе';
+  tdStatus.textContent = status === true ? 'В работе' : 'Завершено';
 
   const tdBtn = document.createElement('td');
 
