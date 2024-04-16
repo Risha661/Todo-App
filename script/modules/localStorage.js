@@ -16,7 +16,7 @@ const setStorage = (key, object) => {
 const removeItemStorage = (name, itemId) => {
   const data = getStorage(name);
   const newData = data.filter(item => item.id !== itemId);
-  setStorage(name, newData);
+  setStorage(name, (newData));
 };
 
 

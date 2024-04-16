@@ -1,5 +1,6 @@
 import {getStorage} from "./localStorage.js";
 import {renderNumber} from "./render.js";
+import {handleInput, saveTask, formControl} from './control.js';
 export const createLogo = () => {
   const h3 = document.createElement('h3');
   h3.textContent = `Todo App:`;
@@ -12,20 +13,27 @@ export const createContainer = () => {
   return container;
 };
 
-export const createRow = (task, status, index1) => {
+export const createRow = (task, status, index1, id) => {
   const tr = document.createElement('tr');
   tr.classList.add('table-light');
+  tr.dataset.id = id;
 
   const tdIndex = document.createElement('td');
   const index = renderNumber();
   tdIndex.textContent = index1 + 1;
 
   const tdTask = document.createElement('td');
-  tdTask.textContent = task;
-
   const tdStatus = document.createElement('td');
-  tdStatus.classList.add('.process');
+  tdTask.textContent = task;
   tdStatus.textContent = status === true ? 'В работе' : 'Завершено';
+  
+  if (status === true) {
+    //tdStatus.classList.add('.process');
+  } else {
+    tdTask.classList.add('.text-decoration-line-through');
+    tr.classList.remove('table-light');
+    tr.classList.add('table-success');
+  }
 
   const tdBtn = document.createElement('td');
 
