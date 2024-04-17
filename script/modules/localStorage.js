@@ -1,4 +1,4 @@
- const getStorage = (key) => {
+const getStorage = (key) => {
   const data = localStorage.getItem(key);
   if (data) {
     return JSON.parse(data);

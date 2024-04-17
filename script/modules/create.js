@@ -1,6 +1,3 @@
-import {getStorage} from "./localStorage.js";
-import {renderNumber} from "./render.js";
-import {handleInput, saveTask, formControl} from './control.js';
 export const createLogo = () => {
   const h3 = document.createElement('h3');
   h3.textContent = `Todo App:`;
@@ -13,7 +10,7 @@ export const createContainer = () => {
   return container;
 };
 
-export const createRow = (task, status, index1, id) => {
+export const createRow = (task, status, index1) => {
   const tr = document.createElement('tr');
   tr.classList.add('table-light');
 
@@ -23,9 +20,10 @@ export const createRow = (task, status, index1, id) => {
 
   const tdTask = document.createElement('td');
   tdTask.classList.add('createText');
+  tdTask.textContent = task;
+
   const tdStatus = document.createElement('td');
   tdStatus.classList.add('status');
-  tdTask.textContent = task;
   tdStatus.textContent = status === true ? 'В работе' : 'Завершено';
   
   if (status === true) {
@@ -57,12 +55,13 @@ export const createRow = (task, status, index1, id) => {
   return tr;
 };
 
-
 export const tableWrapperContainer = () => {
   const wrapper = document.createElement('div');
   wrapper.classList.add('table-wrapper');
+
   const table = document.createElement('table');
   table.classList.add('table', 'table-hover', 'table-bordered');
+
   const thead = document.createElement('thead');
   thead.insertAdjacentHTML('beforeend', `
     <tr>
@@ -75,7 +74,6 @@ export const tableWrapperContainer = () => {
 
   const tbody = document.createElement('tbody');
   table.tbody = createRow();
-
   table.append(thead, tbody);
   wrapper.append(table);
 
@@ -83,30 +81,30 @@ export const tableWrapperContainer = () => {
 };
 
 export const createForm = () => {
-const form = document.createElement('form');
-form.className = 'd-flex align-items-center mb-3';
+  const form = document.createElement('form');
+  form.className = 'd-flex align-items-center mb-3';
 
-const label = document.createElement('label');
-label.className = 'form-group me-3 mb-0';
+  const label = document.createElement('label');
+  label.className = 'form-group me-3 mb-0';
 
-const input = document.createElement('input');
-  input.type = 'text';
-  input.id = 'taskInput';
-  input.className = 'form-control';
-  input.placeholder = 'ввести задачу';
-  label.appendChild(input);
+  const input = document.createElement('input');
+    input.type = 'text';
+    input.id = 'taskInput';
+    input.className = 'form-control';
+    input.placeholder = 'ввести задачу';
+    label.appendChild(input);
 
   const saveButton = document.createElement('button');
-  saveButton.type = 'submit';
-  saveButton.id = 'saveButton';
-  saveButton.className = 'btn btn-primary me-3';
-  saveButton.textContent = 'Сохранить';
+    saveButton.type = 'submit';
+    saveButton.id = 'saveButton';
+    saveButton.className = 'btn btn-primary me-3';
+    saveButton.textContent = 'Сохранить';
 
   const resetButton = document.createElement('button');
-  resetButton.type = 'reset';
-  resetButton.id = 'resetButton';
-  resetButton.className = 'btn btn-warning';
-  resetButton.textContent = 'Очистить';
+    resetButton.type = 'reset';
+    resetButton.id = 'resetButton';
+    resetButton.className = 'btn btn-warning';
+    resetButton.textContent = 'Очистить';
 
   label.append(input);
   form.append(label);
@@ -114,16 +112,4 @@ const input = document.createElement('input');
   form.append(resetButton);
 
   return form;
-};
-
-const createButtonsGroup = (params) => {
-  const btns = params.map(({className, type, text}) => {
-    const button = document.createElement('button');
-    button.type = type;
-    button.textContent = text;
-    button.className = className;
-    return button;
-  });
-
-  return btns;
 };
