@@ -18,7 +18,7 @@ export const createRow = (task, status, index1, id) => {
   tr.classList.add('table-light');
 
   const tdIndex = document.createElement('td');
-  // const index = renderNumber();
+  tdIndex.classList.add('index-row');
   tdIndex.textContent = index1 + 1;
 
   const tdTask = document.createElement('td');

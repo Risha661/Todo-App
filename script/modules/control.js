@@ -66,13 +66,18 @@ export const formControl = () => {
       alert('мы тут удаляем');
 
       const index = Array.from(tbodyId.children).indexOf(row);
+      console.log(index);
       const name = localStorage.getItem('name') || [];
       const data = getStorage(name);
       data.splice(index, 1);
-      console.log(index);
       row.remove();
       removeItemStorage(index);
-
+      const tdIndexOff = row.querySelectorAll('.index-row');
+      console.log(tdIndexOff + 'все индексы');
+      // const tdIndex = row.querySelectorAll('.index-row');
+      // for (let i = 0; i < tdIndex.length; i++) {
+      //   tdIndex[i].textContent = i + 1;
+      // }
       localStorage.setItem(name, JSON.stringify(data));
     }
   });
@@ -118,9 +123,3 @@ export const formControl = () => {
 //     cell.innerHTML = i + 'zz';
 // }
 // };
-function updateIndexesAfterDelete(data) {
-  for (let i = 0; i < data.length; i++) {
-      data[i].index = i + 1;
-  }
-  return data;
-}
