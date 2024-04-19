@@ -47,6 +47,10 @@ export const formControl = () => {
   
   saveButton.addEventListener('click', saveTask);
   taskInput.addEventListener('input', handleInput);
+  resetButton.addEventListener('click', () => {
+    saveButton.disabled = true;
+    resetButton.disabled = true;
+  });
 
   const tbody = document.querySelector('tbody');
   tbody.addEventListener('click', e => {
